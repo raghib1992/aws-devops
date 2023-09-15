@@ -2,7 +2,8 @@
 
 2. Create Ec2
 
-3. allow inbound from ec2 secuiryt group to reach to nfs
+3. allow inbound in EFS security group
+- NFS port 2204 source **EC2 Security Group**
 
 4.  Install the NFS Client on Your EC2 Instance
 ### Ref: https://docs.aws.amazon.com/efs/latest/ug/wt1-test.html
@@ -27,25 +28,28 @@ sudo yum -y install nfs-utils
 mkdir ~/efs-mount-point 
 
 # Mount the Amazon EFS file system.
-sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-08728077a8d85bbc7.efs.eu-north-1.amazonaws.com:/   ~/efs-mount-point
+sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-06ce4f1bc2797c33a.efs.eu-north-1.amazonaws.com:/   ~/efs-mount-point
 
 sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 172.31.16.223:/  ~/efs-mount-point
 
 ```
 
-3. Manually installing the Amazon EFS client
+6. Manually installing the Amazon EFS client
 ### Ref: https://docs.aws.amazon.com/efs/latest/ug/installing-amazon-efs-utils.html
 ### Installing the Amazon EFS client on Amazon Linux and Amazon Linux 2
 ```sh
 sudo yum install -y amazon-efs-utils
 ```
 
-4. Mounting on Amazon EC2 Linux instances using the EFS mount helper
+7. Mounting on Amazon EC2 Linux instances using the EFS mount helper
 ### Ref: https://docs.aws.amazon.com/efs/latest/ug/mounting-fs-mount-helper-ec2-linux.html
 ```sh
-# 
-sudo mount -t efs -o az=us-east-1a,tls fs-08728077a8d85bbc7 efs/
-```
+# mount efs
 sudo mount -t efs fs-08728077a8d85bbc7 efs/
 
+# mount efs one zone
+sudo mount -t efs -o az=us-east-1a,tls fs-08728077a8d85bbc7 efs/
+
+# check mount point
 aws efs describe-mount-targets --file-system-id  fs-08728077a8d85bbc7 --region eu-north-1
+```
