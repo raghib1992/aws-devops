@@ -3,7 +3,7 @@
 2. Create Ec2
 
 3. allow inbound in EFS security group
-- NFS port 2204 source **EC2 Security Group**
+- NFS port 2049 source **EC2 Security Group**
 
 4.  Install the NFS Client on Your EC2 Instance
 ### Ref: https://docs.aws.amazon.com/efs/latest/ug/wt1-test.html
@@ -19,7 +19,6 @@ sudo yum -y update
 
 # Install the NFS client.
 sudo yum -y install nfs-utils
-
 ```
 
 5. Mount the file system on your EC2 instance and test
@@ -32,6 +31,11 @@ sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retr
 
 sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 172.31.16.223:/  ~/efs-mount-point
 
+# Verify file system
+df -h
+
+cd efs-mount-point
+touch server.txt
 ```
 
 6. Manually installing the Amazon EFS client
@@ -45,7 +49,7 @@ sudo yum install -y amazon-efs-utils
 ### Ref: https://docs.aws.amazon.com/efs/latest/ug/mounting-fs-mount-helper-ec2-linux.html
 ```sh
 # mount efs
-sudo mount -t efs fs-08728077a8d85bbc7 efs/
+sudo mount -t efs fs-0e96819c325c6c94f tmp-efs/
 
 # mount efs one zone
 sudo mount -t efs -o az=us-east-1a,tls fs-08728077a8d85bbc7 efs/
