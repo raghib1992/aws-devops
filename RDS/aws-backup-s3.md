@@ -28,8 +28,8 @@ aws iam create-policy  --policy-name ExportPolicy --policy-document '{
                 "s3:GetBucketLocation"
             ],
             "Resource": [
-                "arn:aws:s3:::your-s3-bucket",
-                "arn:aws:s3:::your-s3-bucket/*"
+                "arn:aws:s3:::raghib-db-backup",
+                "arn:aws:s3:::raghib-db-backup/*"
             ]
         }
     ]
