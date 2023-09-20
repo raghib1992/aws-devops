@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "ec2 Instance and Db"
+Resources:
+  myInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-08426983bce362936
+      InstanceType: t2.micro
+    DependsOn: myDB
+  myDB:
+    Type: "AWS::RDS::DBInstance"
+    Properties:
+      DBInstanceClass: db.t2.micro
+      AllocatedStorage: '5'
+      Engine: MySQL
+      EngineVersion: '5.5'
+      MasterUsername: Myname
+      masterUserPassword: Mypassword123

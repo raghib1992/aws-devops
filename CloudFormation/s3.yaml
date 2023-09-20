@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Resources:
+  myBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: raghib008-website
+
+Outputs:
+  BucketName:
+    Value: !Ref myBucket
+    Description: "Name of the s3 bucket"

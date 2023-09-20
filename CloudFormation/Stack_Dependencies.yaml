@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "VPC and Subnet with stack dependencies in Stockholm"
+Resources: 
+    MyVPC:
+      Type: AWS::EC2::VPC
+      Properties:  
+        CidrBlock: "10.10.0.0/16"
+        EnableDnsHostnames: 'true'
+        EnableDnsSupport: 'true'
+        InstanceTenancy: default
+        # Ipv4IpamPoolId: String
+        # Ipv4NetmaskLength: Integer
+        Tags: 
+          - Key: Learn
+            Value: CFDemo
+    MySubnet:
+      Type: AWS::EC2::Subnet
+      Properties: 
+        # AssignIpv6AddressOnCreation: Boolean
+        AvailabilityZone: eu-north-1a
+        # AvailabilityZoneId: String
+        CidrBlock: "10.10.1.0/24"
+        # EnableDns64: Boolean
+        # Ipv6CidrBlock: String
+        # Ipv6Native: Boolean
+        # MapPublicIpOnLaunch: Boolean
+        # OutpostArn: String
+        # PrivateDnsNameOptionsOnLaunch: 
+          # PrivateDnsNameOptionsOnLaunch
+        Tags: 
+          - Key: Name
+            Value: MySubnet
+        VpcId: !Ref MyVPC

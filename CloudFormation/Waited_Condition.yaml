@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "ec2 Instance with Creation Policy"
+Resources:
+  Ec2Instance:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      ImageId: ami-086ee6e5ed2ea3434
+      InstanceType: t3.micro
+
+  PrivateWaitHandle:
+    Type: AWS::CloudFormation::WaitConditionHandle
+
+  PrivateWaitCondition:
+    Type: AWS::CloudFormation::WaitCondition
+    Properties:
+      Handle: !Ref PrivateWaitHandle
+      Timeout: '3600'
+      Count: 1

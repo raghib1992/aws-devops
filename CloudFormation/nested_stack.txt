@@ -1,0 +1,12 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Resources:
+  myStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://raghib-cf-nested-demo.s3.eu-north-1.amazonaws.com/s3.yaml
+      TimeoutInMinutes: '60'
+Outputs:
+  StackRef:
+    Value: !Ref myStack
+  OutputFromNestedStack:
+    Value: !GetAtt myStack.Outputs.BucketName
