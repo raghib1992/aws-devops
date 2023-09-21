@@ -5,5 +5,5 @@ files:
      destination: /tmp
 hooks:
    BeforeInstall:
-    - location: scripts/runbuild.sh
+    - location: scripts/pullbuild.sh
       runas: root
