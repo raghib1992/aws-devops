@@ -29,6 +29,7 @@ Resources:
 # Paramter
 
 # Deletion Policy Attribute
+## Once stack is delete, resources will retian
 ```yaml
 Resources:
   mys3:
