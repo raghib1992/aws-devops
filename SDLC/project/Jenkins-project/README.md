@@ -17,7 +17,8 @@
 3. On the Review page, in Role name, enter the name of the role to create specifically for Jenkins integration (for example, JenkinsAccess), and then choose Create role
 
 # Install and configure Jenkins and the CodePipeline Plugin for Jenkins
-1. Install Jenkins on the EC2 instance. 
+1. Install Jenkins on the EC2 instance.
+### Ref https://www.jenkins.io/doc/tutorials/tutorial-for-installing-jenkins-on-AWS/
 2. On the Manage Jenkins page, choose Manage Plugins
 3. Choose the Available tab, and in the Filter search box, enter AWS CodePipeline. Choose CodePipeline Plugin for Jenkins from the list and choose Download now and install after restart
 4. On the main page, choose New Item.
@@ -43,6 +44,8 @@ rake
 4. On the Step 2: Add source stage page, in Source provider, choose GitHub.
 5. Under Connection, choose an existing connection or create a new one. To create or manage a connection for your GitHub source action, see GitHub connections.
 6. In Step 3: Add build stage, choose Add Jenkins. In Provider name, enter the name of the action you provided in the CodePipeline Plugin for Jenkins (for example MyJenkinsProviderName). This name must exactly match the name in the CodePipeline Plugin for Jenkins. In Server URL, enter the URL of the EC2 instance where Jenkins is installed. In Project name, enter the name of the project you created in Jenkins, such as MyDemoProject, and then choose Next.
+
 7. In Step 4: Add deploy stage, reuse the CodeDeploy application and deployment group you created in Tutorial: Create a simple pipeline (S3 bucket). In Deploy provider, choose CodeDeploy. In Application name, enter CodePipelineDemoApplication, or choose the refresh button, and then choose the application name from the list. In Deployment group, enter CodePipelineDemoFleet, or choose it from the list, and then choose Next.
+
 8. In Step 5: Review, review the information, and then choose Create pipeline.
 9. The pipeline automatically starts and runs the sample through the pipeline. You can view progress and success and failure messages as the pipeline builds the Haml sample to HTML and deploys it a webpage to each of the Amazon EC2 instances in the CodeDeploy deployment
