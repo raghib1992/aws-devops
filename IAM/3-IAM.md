@@ -13,6 +13,18 @@
 3. or an inline policy
 - An inline policy is a policy created for a single IAM identity (a user, group, or role). Inline policies maintain a strict one-to-one relationship between a policy and an identity. They are deleted when you delete the identity. You can create a policy and embed it in an identity, either when you create the identity or later. If a policy could apply to more than one entity, it’s better to use a managed policy.
 
+# Element in IAM Policy
+1. version
+2. Statement
+3. Effect
+4. Action
+5. Resources
+6. Principal
+- Specify things like IAM user, federated user, IAM ROle, aws account, aws services and etc
+- You cannot use principal element in an IAM identity based policy
+```json
+"Principal": {"AWS":"arn:aws:iam::account-id:root"}
+```
 
 # Identity and resource based policy
 1. Identity based policy are attached to an IAM, Group and Roles
@@ -41,3 +53,25 @@
     }
 }
 ```
+
+
+# Secure Token Service (STS)
+### Credential Manager
+### Provide temporary credential expire after short term duration
+### sts cli command
+### Ref https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/index.html
+### Fetch STS Token for same account
+```sh
+aws sts get-session-token --duration-seconds 1800
+# duration seconds range from 900 seconds (15 minutes) to 129,600 seconds (36 hours), with 43,200 seconds (12 hours) as the default
+```
+
+### Fetch STS Token from Cross account
+1. Create Role in Account B
+- Role for another - aws account A
+- Attach POlicy
+2. From Account A, assume role of cross account
+```sh
+aws sts assume-role --role-arn arn:aws:iam::566881612178:role/umber-clound_sankalan_cross_account_role --role-session-name tmp
+```
+3. Update the access, secret and token awscli profile
