@@ -12,6 +12,12 @@
 - You create these customer managed policies for your specific use cases, and you can change and update them as often as you like
 3. or an inline policy
 - An inline policy is a policy created for a single IAM identity (a user, group, or role). Inline policies maintain a strict one-to-one relationship between a policy and an identity. They are deleted when you delete the identity. You can create a policy and embed it in an identity, either when you create the identity or later. If a policy could apply to more than one entity, it’s better to use a managed policy.
+### Cli command to create iam policy
+```sh
+aws iam create-policy --policy-name AllowExternalDNSUpdates --policy-document file://external-dns-policy.json
+
+
+```
 
 # Element in IAM Policy
 1. version
