@@ -7,10 +7,12 @@ Resources:
     MySubnet:
         VpcId: !Ref MyVPC
 ```
+### Check 01-Stack_Dependencies.yaml
+*******************************
 # Depends on Attribute
 #### A resource is created which depends on another resources
-#### Check Depends_Attribute.yaml file
-
+#### Check 02-Depends_Attribute.yaml file
+*****************************
 # Error
 1. Validation Error
 - The validation error occurs when CloudFormation cannot parse the template.
@@ -23,8 +25,8 @@ Resources:
 
 
 # Change Set
-- It allow us to submit the create a change set  y submitting  changes against  the stack you want to update
-- CF compare the stack to the new template  and/or paramter values and produces a change set  that you review  and then choose to apply
+- It allow us to submit the create a change set  by submitting  changes against  the stack you want to update
+- CF compare the stack to the new template  and/or parameter values and produces a change set  that you review  and then choose to apply
 
 # Paramter
 
