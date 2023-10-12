@@ -1,3 +1,45 @@
+# CLoud Formation
+### Ref sample cloudformation template
+- *https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/sample-templates-services-us-west-2.html*
+
+
+# template Anatomy
+```yaml
+AWSTemplateFormatVersion: "2010-09-09",
+Description:
+Metadata:
+Parameters:
+Mappings:
+Conditons:
+Transform:
+Resources:
+Outputs:
+```
+## Parameter
+- MAX 60 PARAMTER
+- Alphanumeric and unique
+- Type
+   - String
+   - Number
+   - List
+   - CommaDelimiterList
+   - aws specific parameter types
+   - ssm parameter
+   - parameter converted to string for referrence elsewhere
+
+```yaml
+Parameters:
+  # Any random name as per convience
+  InstanceTypeParamter:
+    Type: String
+    Default: t2.micro
+    Allowedvalues: [ t2.micro, m1.small, m1.large ]
+    Description: "Choose the instance type to create your ec2 instance"
+```
+# Cost of clloudformation stack
+- cloud formation is free
+- you pay for the resources spun up
+
 # Stack Dependencies
 ```yml
 AWSTemplateFormatVersion: "2010-09-09"

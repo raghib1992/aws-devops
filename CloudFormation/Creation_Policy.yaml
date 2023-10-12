@@ -1,12 +1,12 @@
-AWSTemplateFormatVersion: "2010-09-09"
-Description: "ec2 Instance with Creation Policy"
+AWSTemplateFormatVersion: '2010-09-09'
+Description: ec2 Instance with Creation Policy
 Resources:
-  myInstance:
-    Type: AWS::EC2::Instance
-    Properties:
-      ImageId: ami-086ee6e5ed2ea3434
-      InstanceType: t3.micro
-    CreationPolicy:
-      ResourceSignal:
-        Timeout: PT15M
-        Count: 1
+    myInstance:
+        Type: 'AWS::EC2::Instance'
+        Properties:
+            ImageId: ami-086ee6e5ed2ea3434
+            InstanceType: t3.micro
+        CreationPolicy:
+            ResourceSignal:
+                Timeout: PT15M
+                Count: 1

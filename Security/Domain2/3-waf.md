@@ -26,10 +26,9 @@
 - Sample Rule: 
     - Block all request which is coming out from india
     - Block all request which has uri path of admin
-```
 
 ## Create new web ACL
-1. **Name**: demo-wacl
+1. **Name**: demo-waf
 2. **Description**: For learning Purpose
 3. **CloudWatch metric name**: Leave as default
 4. **Resource type**: select any one
@@ -38,18 +37,44 @@
 5. **Associated AWS resources - optional (0)**
 4. Add rule
 - Add my own rules and rule groups
-## Aws based rule for sql
+- Create custom responce
+       
 
-## Create custom responce
-1. custom responce bodies
-2. Create custom responce body
-3. make your own responce
-4. save
-5. edit rules and enable custom responce
-6. add responce code - 403
-7. save
 
-### sql injection for tst
-```sql
-http://waf-alb-78571994.eu-north-1.elb.amazonaws.com/products?category=courses%27+OR+1=1--
+### Rule for block source IP from spefic country
+- Add Rule
+    - Name
+    - Type: Regular rule
+    - If request: Not condition
+    - Statement:
+        - Inspect: Originates from a country
+        - Country Codes
+        - Select: SourceIP / IP in header
+    - Action
+        - Block
+
+
+
+### Rule to block specific string in URI
+- Add Rule
+    - Name
+    - Type: Regular rule
+    - If request: Match condition
+    - Statement:
+        - Inspect: URI Path
+        - Match Type: Contain string
+        - String to Match: string wants to block eg. admin
+    - Action
+        - Block/Captcha
+
+### Block sql injection in URI
+- Add Rule
+    - Add Managed rule
+    - Aws managed rule
+        - Enable SQL Database
+    - save
+
+
+```t
+http://http://demo-waf-alb-1337700633.eu-north-1.elb.amazonaws.com//products?category=courses%27+OR+1=1--
 ```
