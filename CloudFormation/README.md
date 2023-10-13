@@ -36,6 +36,45 @@ Parameters:
     Allowedvalues: [ t2.micro, m1.small, m1.large ]
     Description: "Choose the instance type to create your ec2 instance"
 ```
+
+# Intrinsic Function
+- several built-in functions
+- used in specific parts of template 
+  - resources, output, metadata, update, policy attribute.
+
+```yaml
+Fn::GetAZs: eu-north-1
+## Output is list of Az in stockholm region
+
+## 
+Fn::FindInMap:
+  - MapName, TopLevelKey, SecondLevelKey
+
+```
+
+# Pseudo Parameter
+- Predefine by aws parameter
+- Use intrinsic parameter Ref to retrieve values
+```yaml
+AWS::Region
+AWS::AccountId
+AWS::NotificationARNs
+AWS::StackId
+AWS::StackName
+```
+
+# Condition
+- Based on condtion entities are created or configured
+```yaml
+Fn::And
+Fn::Equals
+Fn::If
+FN::Not
+Fn::Or
+```
+
+
+
 # Cost of clloudformation stack
 - cloud formation is free
 - you pay for the resources spun up
@@ -70,7 +109,7 @@ Resources:
 - It allow us to submit the create a change set  by submitting  changes against  the stack you want to update
 - CF compare the stack to the new template  and/or parameter values and produces a change set  that you review  and then choose to apply
 
-# Paramter
+
 
 # Deletion Policy Attribute
 ## Once stack is delete, resources will retian
