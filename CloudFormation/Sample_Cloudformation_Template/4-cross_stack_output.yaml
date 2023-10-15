@@ -1,0 +1,15 @@
+# This template is receiver of cross stack output
+AWSTemplateFormatVersion : "2010-09-09"
+Description : "Creating security group for frontend applcation"
+Parameters:
+  PrivateKey:
+    Type: 'AWS::EC2::KeyPair::KeyName'
+Resources:
+  MyEC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: t3.micro
+      ImageId: ami-0ea7dc624e77a15d5
+      KeyName: !Ref PrivateKey
+      SecurityGroupIds: 
+        - !ImportValue abc

@@ -50,6 +50,10 @@ Fn::GetAZs: eu-north-1
 Fn::FindInMap:
   - MapName, TopLevelKey, SecondLevelKey
 
+
+##
+Fn::Join
+## Append set of values into a sinlge value, separated by specific delimitere
 ```
 
 # Pseudo Parameter
@@ -73,7 +77,15 @@ FN::Not
 Fn::Or
 ```
 
-
+# Output
+```yaml
+Outputs:
+  Logical ID:
+    Description: Information about the value
+    Value: Value to return
+    Export:
+      Name: Name of resource to export
+```
 
 # Cost of clloudformation stack
 - cloud formation is free

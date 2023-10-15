@@ -1,0 +1,33 @@
+{
+    "AWSTemplateFormatVersion" : "2010-09-09",
+    "Parameters": {
+      "PrivateKey": {
+          "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instance",
+          "Type" : "AWS::EC2::KeyPair::KeyName",
+          "ConstraintDescription" : "Can contain only ASCII characters."
+      }           
+    },
+    "Resources" : {
+        "Ec2Instance" : {
+          "Type" : "AWS::EC2::Instance",
+          "Properties" : {
+            "ImageId" : "ami-0ea7dc624e77a15d5",
+            "KeyName" : { "Ref" : "PrivateKey" },
+            "InstanceType" : "t3.small"
+          }
+        },
+        "demoBucket" : {
+          "Type" : "AWS::S3::Bucket"
+        }
+      },
+    "Outputs" : {
+        "PublicIP" : {
+          "Description" : "Getting Public IP",
+          "Value" : { "Fn::GetAtt" : [ "Ec2Instance", "PublicIp" ] }
+        },
+        "BUCKETName" : {
+          "Description" : "Getting Bucket Name",
+          "Value" : { "Ref" : "demoBucket" }
+        }
+    }
+}

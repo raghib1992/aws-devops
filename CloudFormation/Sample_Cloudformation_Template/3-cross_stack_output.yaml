@@ -1,0 +1,27 @@
+# This cloudformation template sender of output
+AWSTemplateFormatVersion : "2010-09-09"
+Description : "Creating security group for frontend applcation"
+Resources:
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow http to client host
+      VpcId: "vpc-03ea8990493bb1d29"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          FromPort: -1
+          ToPort: -1
+          CidrIp: 0.0.0.0/0
+Outputs:
+  SECURITYGROUP:
+    Value: !GetAtt
+      - InstanceSecurityGroup
+      - GroupId
+    Description: "Export security group id for other stack"
+    Export:
+      Name: abc

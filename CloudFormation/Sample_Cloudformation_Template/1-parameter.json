@@ -10,7 +10,7 @@
         "ConstraintDescription" : "Can contain only ASCII characters."
       },
       "EnvType" : {
-        "Description" : "Environment type.",
+        "Description" : "Environment type",
         "Default" : "test",
         "Type" : "String",
         "AllowedValues" : ["prod", "dev", "test"],
@@ -165,66 +165,60 @@
         "ca-central-1"     : {"HVM64" : "ami-0b18956f", "HVMG2" : "NOT_SUPPORTED"},
         "sa-east-1"        : {"HVM64" : "ami-07b14488da8ea02a0", "HVMG2" : "NOT_SUPPORTED"},
         "cn-north-1"       : {"HVM64" : "ami-0a4eaf6c4454eda75", "HVMG2" : "NOT_SUPPORTED"},
-        "cn-northwest-1"   : {"HVM64" : "ami-6b6a7d09", "HVMG2" : "NOT_SUPPORTED"}
+        "cn-northwest-1"   : {"HVM64" : "ami-6b6a7d09", "HVMG2" : "NOT_SUPPORTED"},
+        "eu-north-1"       : {"HVM64" : "ami-0ea7dc624e77a15d5", "HVMG2" : "ami-09be1ca0d952ee898"}
       }
     },
 
     "Conditions" : {
-        "CreateProdResources" : {"Fn::Equals" : [{"Ref" : "EnvType"}, "prod"]},
+        "CreateProdResources" : {"Fn::Equals" : [{"Ref" : "EnvType"}, "prod"]}
     },
       
   
     "Resources" : {
   
-      "WebServerInstance": {
-        "Type": "AWS::EC2::Instance",
-        "Properties": {
-          "ImageId" : { "Fn::FindInMap" : [ "AWSRegionArch2AMI", { "Ref" : "AWS::Region" },
-                            { "Fn::FindInMap" : [ "AWSInstanceType2Arch", { "Ref" : "InstanceType" }, "Arch" ] } ] },
-          "InstanceType"   : { "Ref" : "RootInstanceProfile" },
-          "SecurityGroups" : [ {"Ref" : "WebServerSecurityGroup"} ],
-          "IamInstanceProfile" : { "Ref" : "MyInstanceProfile"},
-          "KeyName"        : { "Ref" : "KeyName" }
-        }
-      },
+        "WebServerInstance": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+            "ImageId" : { "Fn::FindInMap" : [ "AWSRegionArch2AMI", { "Ref" : "AWS::Region" },
+                                { "Fn::FindInMap" : [ "AWSInstanceType2Arch", { "Ref" : "InstanceType" }, "Arch" ] } ] },
+            "InstanceType"   : { "Ref" : "RootInstanceProfile" },
+            "SecurityGroups" : [ {"Ref" : "WebServerSecurityGroup"} ],
+            "IamInstanceProfile" : { "Ref" : "RootInstanceProfile"},
+            "KeyName"        : { "Ref" : "KeyName" }
+            }
+        },
 
-      "MySNSTopic" : {
-        "Type" : "AWS::SNS::Topic",
-        "Properties" : {
-          "Subscription" : [{
-            "Endpoint" : { "Fn::If" : [
-                "CreateProdResources",
-                "bigboss@good,com",
-                "developer@good.com"
-              ]         
-             },
-            "Protocol" : "email"
-          }, {
-            "Endpoint" : { "Fn::GetAtt" : [ "MyQueue2", "Arn" ] },
-            "Protocol" : "sqs"
-          }],
-          "TopicName" : "SampleTopic"
-        }
-      },
-
-    "RootRole": {
-        "Type": "AWS::IAM::Role",
-        "Properties": {
-            "AssumeRolePolicyDocument": {
-                "Version": "2012-10-17",
-                "Statement": [
-                    {
-                        "Effect": "Allow",
-                        "Principal": {
-                            "Service": [
-                                "ec2.amazonaws.com"
+        "MySNSTopic" : {
+            "Type" : "AWS::SNS::Topic",
+            "Properties" : {
+            "Subscription" : [{
+                "Endpoint" : { "Fn::If" : [
+                    "CreateProdResources",
+                    "bigboss@good,com",
+                    "developer@good.com"]},
+                "Protocol": "email"
+            }]
+            }
+        },
+        "RootRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "ec2.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
                             ]
-                        },
-                        "Action": [
-                            "sts:AssumeRole"
-                        ]
-                    }
-                ]
+                        }
+                    ]
             },
             "Path": "/",
             "Policies": [
@@ -242,29 +236,29 @@
                     }
                 }
             ]
-        }
-    },
-    "RootInstanceProfile": {
-        "Type": "AWS::IAM::InstanceProfile",
-        "Properties": {
-            "Path": "/",
-            "Roles": [
-                {
-                    "Ref": "RootRole"
-                }
+            }
+        },
+        "RootInstanceProfile": {
+            "Type": "AWS::IAM::InstanceProfile",
+            "Properties": {
+                "Path": "/",
+                "Roles": [
+                    {
+                        "Ref": "RootRole"
+                    }
+                ]
+            }
+        },
+        "WebServerSecurityGroup" : {
+            "Type" : "AWS::EC2::SecurityGroup",
+            "Properties" : {
+            "GroupDescription" : "Enable HTTP access via port 80",
+            "SecurityGroupIngress" : [
+                {"IpProtocol" : "tcp", "FromPort" : 80, "ToPort" : 80, "CidrIp" : "0.0.0.0/0"},
+                {"IpProtocol" : "tcp", "FromPort" : 22, "ToPort" : 22, "CidrIp" : { "Ref" : "SSHLocation"}}
             ]
+            }
         }
-    },
-    "WebServerSecurityGroup" : {
-        "Type" : "AWS::EC2::SecurityGroup",
-        "Properties" : {
-          "GroupDescription" : "Enable HTTP access via port 80",
-          "SecurityGroupIngress" : [
-            {"IpProtocol" : "tcp", "FromPort" : 80, "ToPort" : 80, "CidrIp" : "0.0.0.0/0"},
-            {"IpProtocol" : "tcp", "FromPort" : 22, "ToPort" : 22, "CidrIp" : { "Ref" : "SSHLocation"}}
-          ]
-        }
-      }
     },
   
     "Outputs" : {
