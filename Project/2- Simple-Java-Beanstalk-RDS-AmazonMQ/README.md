@@ -5,7 +5,7 @@
 - **Name** vprofile-prod-key
 
 2. Security group
- For Load balancer
+- For Load balancer
     - Inbound
         - HTTPS from everywhere
 - For Frontend app
@@ -51,7 +51,7 @@
     - database name: accounts
     - DB paramter: vprofile-rds-para-grp
 
-- Create ec2 in same vpc to access rds
+- Create ec2 in same vpc to access rds to create required db, tables
      - install mysql client
      - ubuntu: mysql-client 
      - centos: maraidb
@@ -111,3 +111,44 @@ mysql -h db-endpoitn -u admin -padmin123 accounts < src/main/reources/db_backup.
     - sg - create new sg
     - capacity
         - load balances
+
+7. Update ACL in s3
+- Go s3 bucket
+- look for beanstalk bucket
+- Permission
+- ACL - Object Ownership - ACLs enabled
+
+8. Add health check
+- Beanstalk -> Environment -> Configuration -> Instance traffic and scaling
+- Process -> Edit -> 
+- Health Check -> Path -> /login
+- Enable session stickness
+
+9. Add https listener
+- Beanstalk -> Environment -> Configuration
+- Listeners -> add listener
+
+10. Change sg
+- Ec2 -> Copy the sg-id
+- Go to backend sg, EDit
+- Inbound RUle
+- All traffic from sg-id (copy above)
+
+11. Update application.properties
+- db01 = rds endpoints
+- mc01 = memchached endpoints
+- rmq01 = rabbitmq url
+- rmq port = as per amazon rmq port
+- rmq username = rabbit
+- rmq password = Blue7890bunny
+
+12. Build the artifacts
+- Install mvn locally
+- mvn -version
+- mvn install
+- check 'target/**.war file'
+
+13. Deploy artifacts
+- Beanstalk -> Environment -> Upload and deploy
+
+14. Create DNS for elactic dns in Route 53
