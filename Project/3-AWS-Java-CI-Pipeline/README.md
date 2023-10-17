@@ -3,7 +3,7 @@
 
 1. Create Repo in Codecommit
 - **Name:** vprofile-code-repo
-- COnfigure ssh method to access repo locally
+- Configure ssh method to access repo locally
     - IAM User
         - Create IAM Role
         - Attach policy
@@ -226,7 +226,7 @@ change mirror
         - region: stockholm
         - input artifacts: build artifacts
         - bucket name: 
-        - object key: pipeline-artifacts 
+        - object key: pipeline-artifacts
 - Settings -> Notification 
     - create notificatio rule
         - name: vprofile-ci-pipeline-notification
@@ -243,6 +243,5 @@ change mirror
     - bugs Value 40
 - Go to project
 - Administrator
-- Qulaity Gates
+- Quality Gates
     - Select vprofile-qualitygate instead og default
-
