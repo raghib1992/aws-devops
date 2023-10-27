@@ -54,4 +54,5 @@ journalctl -n100
 - restart prometheus
 ## Get wni-exporter to get window details
 - Connect to window server
-- 
+- Download link *https://github.com/prometheus-community/windows_exporter*
+- relaese Page *https://github.com/prometheus-community/windows_exporter/releases*
