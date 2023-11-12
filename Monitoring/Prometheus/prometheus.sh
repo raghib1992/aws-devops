@@ -54,3 +54,6 @@ WantedBy=multi-user.target' > /etc/systemd/system/prometheus.service
 systemctl daemon-reload
 systemctl enable prometheus
 systemctl start prometheus
+
+
+# http://localhost:9090
