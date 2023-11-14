@@ -1,10 +1,10 @@
 # Http
 ## Ref https://docs.google.com/document/d/1wEdTyk14LK00DN-3hIFoP7RTcbf2T8beNI_tVsv6xI4/edit?usp=sharing
 ## Manually Get HTTP
-```
+```sh
 telnet <hostname or IP> in <port-no.>
 ```
-```
+```sh
 GET <request uri> HTTP/1.1
 Host: <fqdn or publicIP>
 ```
