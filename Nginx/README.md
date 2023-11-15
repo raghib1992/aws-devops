@@ -16,15 +16,6 @@
 
 # Install Of Nginx
 - REF: *https://docs.google.com/document/d/1daWEkgwfxTAAEYw-42ZKAb6nV3CfLk66eoOS6ijzXgs/edit*
-
-- Install Nginx from official repos.
-    - REF: *https://nginx.org/packages/*
-```sh
-yum -y install wget
-wget https://nginx.org/packages/centos/8/x86_64/RPMS/nginx-1.20.1-1.el8.ngx.x86_64.rpm
-yum -y install nginx-1.20.1-1.el8.ngx.x86_64.rpm
-systemctl start nginx
-```
 - LINUX
 - WINDOW (BETA-like)
 - Docker
