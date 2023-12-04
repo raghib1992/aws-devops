@@ -11,5 +11,5 @@ npm install -g typescript
 # Install aws-cdk
 1. Install aws cdk
 ```
-npm install -g aws-cdk
+npm i -g aws-cdk
 ```
