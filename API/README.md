@@ -5,7 +5,7 @@ We can do various thing at api level
 - cache
 - authentication
 - WAF
-- Some kind of throtling 
+- Some kind of throtling
 - etc
 
 
