@@ -84,7 +84,7 @@
                 ```
 2. Create code artifatcs
 - **Name:**     
-- Public upstrream repo: maven-central-store
+- Public upstream repo: maven-central-store
 - aws account: this account
 - domain: visualpath
 ### View Connection
@@ -108,7 +108,7 @@ change mirror
 - push changes to codecommit
 
 3. Create Sonar cloud for code analysi
-- Login to sonrcloud
+- Login to sonarcloud
     - *https://sonarcloud.io/login*
 - generate a token
     - User->MyAccount -> Security
