@@ -2,18 +2,18 @@
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   #version = "4.0.1"  
-  version = "5.4.0"
+  version = "5.5.0"
     
   # VPC Basic Details
   name = "vpc-dev"
   cidr = "10.0.0.0/16"   
-  azs                 = ["us-east-1a", "us-east-1b"]
+  azs                 = ["eu-north-1a", "eu-north-1b"]
   private_subnets     = ["10.0.1.0/24", "10.0.2.0/24"]
   public_subnets      = ["10.0.101.0/24", "10.0.102.0/24"]
 
   # Database Subnets
-  create_database_subnet_group = true
-  create_database_subnet_route_table= true
+  create_database_subnet_group = true # Description: Controls if database subnet group should be created (n.b. database_subnets must also be set)
+  create_database_subnet_route_table = true
   database_subnets    = ["10.0.151.0/24", "10.0.152.0/24"]
 
   #create_database_nat_gateway_route = true
@@ -40,7 +40,7 @@ module "vpc" {
   }
 
   tags = {
-    Owner = "kalyan"
+    Owner = "Raghib"
     Environment = "dev"
   }
 
