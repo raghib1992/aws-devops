@@ -1,13 +1,15 @@
 # IAM
 1. User
-- By default user doesn't have any permission
+    - By default user doesn't have any permission
 2. Rules
 3. Resource
 
 ## IAM POlicy
-1. AWS managed policy
+1. **AWS managed policy**
 - An AWS managed policy is a standalone policy that is created and administered by AWS
-- Standalone policy means that the policy has its own Amazon Resource Name (ARN) that includes the policy name. For example, arn:aws:iam::aws:policy/IAMReadOnlyAccess is an AWS managed policy
+- You cannot change the permissions defined in AWS managed policies.
+i. **Standalone policy**
+-It means that the policy has its own Amazon Resource Name (ARN) that includes the policy name. For example, arn:aws:iam::aws:policy/IAMReadOnlyAccess is an AWS managed policy
 2. a customer managed policy
 - You create these customer managed policies for your specific use cases, and you can change and update them as often as you like
 3. or an inline policy
