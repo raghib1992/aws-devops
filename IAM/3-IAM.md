@@ -5,15 +5,26 @@
 3. Resource
 
 ## IAM POlicy
-1. **AWS managed policy**
-- An AWS managed policy is a standalone policy that is created and administered by AWS
-- You cannot change the permissions defined in AWS managed policies.
-i. **Standalone policy**
--It means that the policy has its own Amazon Resource Name (ARN) that includes the policy name. For example, arn:aws:iam::aws:policy/IAMReadOnlyAccess is an AWS managed policy
-2. a customer managed policy
-- You create these customer managed policies for your specific use cases, and you can change and update them as often as you like
-3. or an inline policy
-- An inline policy is a policy created for a single IAM identity (a user, group, or role). Inline policies maintain a strict one-to-one relationship between a policy and an identity. They are deleted when you delete the identity. You can create a policy and embed it in an identity, either when you create the identity or later. If a policy could apply to more than one entity, it’s better to use a managed policy.
+# Identity and resource based policy
+- **Identity-based policies** are permissions policies that you attach to an IAM identity, such as an IAM user, group, or role.
+Identity-based policies can be further categorized:
+    1. **AWS managed policy**
+    - An AWS managed policy is a standalone policy that is created and administered by AWS
+    - You cannot change the permissions defined in AWS managed policies.
+    - **Standalone policy**
+    -It means that the policy has its own Amazon Resource Name (ARN) that includes the policy name. For example, arn:aws:iam::aws:policy/IAMReadOnlyAccess is an AWS managed policy
+    2. **Customer managed policy**
+    - You create these customer managed policies for your specific use cases, and you can change and update them as often as you like
+    - **Create Custom POlicy and attached to IAM user**
+        - Step 1: Create the policy
+        - Step 2: Attach the policy
+        - Step 3: Test user access
+
+    3. **Inline policy**
+    - An inline policy is a policy created for a single IAM identity (a user, group, or role). Inline policies maintain a strict one-to-one relationship between a policy and an identity. They are deleted when you delete the identity. You can create a policy and embed it in an identity, either when you create the identity or later. If a policy could apply to more than one entity, it’s better to use a managed policy
+-  **Resource-based policies** are permissions policies that you attach to a resource such as an Amazon S3 bucket or an IAM role trust policy.
+- Resource-based policies are inline policies, and there are no managed resource-based policies. To enable cross-account access, you can specify an entire account or IAM entities in another account as the principal in a resource-based policy.
+.
 ### Cli command to create iam policy
 ```sh
 aws iam create-policy --policy-name AllowExternalDNSUpdates --policy-document file://external-dns-policy.json
@@ -34,9 +45,6 @@ aws iam create-policy --policy-name AllowExternalDNSUpdates --policy-document fi
 "Principal": {"AWS":"arn:aws:iam::account-id:root"}
 ```
 
-# Identity and resource based policy
-1. Identity based policy are attached to an IAM, Group and Roles
-2. Resouce Based policy  are attached to resources
 
 
 # Cross Account IAM Role

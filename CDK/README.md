@@ -1,5 +1,5 @@
-# Tools Required
-1. Nodejs
+# PreRequisite
+1. Install Node.js
 2. typescript
 ```
 npm install -g typescript
@@ -13,3 +13,4 @@ npm install -g typescript
 ```
 npm i -g aws-cdk
 ```
+
