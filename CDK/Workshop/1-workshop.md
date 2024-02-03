@@ -1,5 +1,8 @@
-# For Workshop
+# Ref
+### For Workshop
 - Link: *https://cdkworkshop.com/*
+### AWS sample code cdk
+- Link: *https://docs.aws.amazon.com/solutions/latest/constructs/welcome.html*
 
 1. Use aws clound 9
 2. Create Admin IAM role with admin policy
@@ -18,7 +21,7 @@
     ```
     sudo yum install -y jq
     ```
-    - COnfigure aws cli
+    - Configure aws cli
     ```
     export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
     export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r 'region')
@@ -85,3 +88,22 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
  * `cdk synth`       emits the synthesized CloudFormation template
 ```
 11. Run `npm run watch` in new terminal
+12. Run `cdk synth > template.yml` to get template of cloudformation template
+13. Run `cdk bootstrap`
+```
+Bootstrapping an environment #
+The first time you deploy an AWS CDK app into an environment (account/region), you can install a “bootstrap stack”. This stack includes resources that are used in the toolkit’s operation. For example, the stack includes an S3 bucket that is used to store templates and assets during the deployment process.
+
+You can use the cdk bootstrap command to install the bootstrap stack into an environment:
+```
+14. Run `cdk diff`
+15. Run `cdk deploy`
+16. Clean const from Open **lib/cdk-workshop-stack.ts**
+17. Now that we modified our stack’s contents, we can ask the toolkit to show us the difference between our CDK app and what’s currently deployed
+```
+cdk diff
+```
+18. Run cdk deploy and proceed to the next section
+```
+cdk deploy
+```
