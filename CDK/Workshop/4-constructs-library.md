@@ -5,7 +5,7 @@
 
 ## Install the Library
 1. you’ll need to install the npm module:
-```
+```sh
 npm install cdk-dynamo-table-viewer@0.2.46
 ```
 
