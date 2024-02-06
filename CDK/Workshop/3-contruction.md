@@ -125,7 +125,7 @@ export class CdkWorkshopStack extends cdk.Stack {
 
 5. Allow Lambda to read/write our DynamoDB table
 - Go back to hitcounter.ts and add the following highlighted lines:
-```
+```ts
 import * as cdk from 'aws-cdk-lib';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
@@ -164,7 +164,7 @@ export class HitCounter extends Construct {
 }
 ```
 6. Grant invoke permissions in lib/hitcounter.ts
-```
+```ts
 import * as cdk from 'aws-cdk-lib';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
