@@ -138,3 +138,38 @@
     ]
 }
 ```
+
+
+```json
+{
+    "Version": "2008-10-17",
+    "Statement": [
+        {
+            "Sid": "eb-af163bf3-d27b-4712-b795-d1e33e331ca4",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::561243041928:role/vprofile-bean-role"
+            },
+            "Action": [
+                "s3:ListBucket",
+                "s3:ListBucketVersions",
+                "s3:GetObject",
+                "s3:GetObjectVersion"
+            ],
+            "Resource": [
+                "arn:aws:s3:::elasticbeanstalk-eu-north-1-561243041928",
+                "arn:aws:s3:::elasticbeanstalk-eu-north-1-561243041928/resources/environments/*"
+            ]
+        },
+        {
+            "Sid": "eb-58950a8c-feb6-11e2-89e0-0800277d041b",
+            "Effect": "Deny",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:DeleteBucket",
+            "Resource": "arn:aws:s3:::elasticbeanstalk-eu-north-1-561243041928"
+        }
+    ]
+}
+```
