@@ -1,6 +1,6 @@
 1. Create ec2 linux instance
 2. Login to ec2 machine
-```
+```sh
 yum update
 yum install docker -y
 service docker start
@@ -15,12 +15,12 @@ service httpd start
 ```
 3. Check on browser the index file must host on container
 4. Again ssh into ec2 instance
-```
+```sh
 docker ps
 docker ps -a
 ```
 5. Create docker file
-```
+```t
 FROM centos:centos6
 
 MAINTAINER Raghib Nadim
@@ -32,7 +32,7 @@ COPY index.html /var/www/html/
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 ```
 6. Create index.html file
-```
+```html
 <html>
     <body>
         <h1>
@@ -43,7 +43,7 @@ CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 </html>
 ```
 7. Create docker image
-```
+```sh
 docker build -t raghib1992/centos6 . 
 ```
 8. Create container
@@ -123,8 +123,8 @@ phases:
 17. Start code build
 
 18. Create Image definition json for code deploy
-#### 
-```
+
+```json
 [
   {
     "name": "<container name>",
