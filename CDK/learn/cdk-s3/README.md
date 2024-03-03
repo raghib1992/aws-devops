@@ -1,5 +1,8 @@
 # Welcome to your CDK TypeScript project
-
+### Initialize the app by using the cdk init command. Specify the programming language.
+```
+cdk init app --language typescript 
+```
 This is a blank project for CDK development with TypeScript.
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
