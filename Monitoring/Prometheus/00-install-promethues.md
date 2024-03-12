@@ -34,15 +34,11 @@ sudo cp prometheus.yaml /etc/prometheus/prometheus.yml
 #Permissions
 sudo chown prometheus:prometheus /etc/prometheus/prometheus.yml
 
-sudo u prometheus /usr/local/bin/prometheus
---
-config.file /etc/prometheus/prometheus.yml
---
-storage.tsdb.path /var/lib/
---
-web.console.templates=/etc/prometheus/consoles
---
-web.console.libraries=/etc/prometheus/console_libraries
+sudo -u prometheus /usr/local/bin/prometheus \
+    --config.file /etc/prometheus/prometheus.yml \
+    --storage.tsdb.path /var/lib/ \
+    --web.console.templates=/etc/prometheus/consoles \
+    --web.console.libraries=/etc/prometheus/console_libraries
 ```
 #### Create service file
 ```sh
@@ -82,6 +78,45 @@ http://localhost:9090
 up 
 # click on execute
 ```
+### Reloading Configuration
+- After making changes to the Prometheus confiigs, a reload of the configuration needs to take place for changes to take affect
+1. Restart Prometheus
+```
+systemctl restart prometheus
+```
+2. Send a SIGHUP signal to the Prometheus process
+```
+sudo killall -HUP prometheus
+```
+3. Send a POST/PUT request to http://<prometheus>/-/reload
+- This functionality not enabled by default
+- Need to start prometheus with --web.enable-lifecycle flag
+```t
+[Unit]
+Description=Prometheus
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=prometheus
+Group=prometheus
+Type=simple
+ExecStart=/usr/local/bin/prometheus \
+    --config.file /etc/prometheus/prometheus.yml \
+    --storage.tsdb.path /var/lib/prometheus/ \
+    --web.console.templates=/etc/prometheus/consoles \
+    --web.console.libraries=/etc/prometheus/console_libraries \
+    --web.enable-lifecycle   # This should be enable
+[Install]
+WantedBy=multi-user.target
+```
+## Run command 
+```sh
+sudo systemctl daemon-reload
+sudo systemctl restart prometheus
+curl -X POST http://<prometheus>/-/reload
+```
+
 ## Install Prom on Ubuntu 20.04
 ```
 sudo apt update -y
