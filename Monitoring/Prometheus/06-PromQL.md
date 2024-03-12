@@ -1,7 +1,11 @@
 # PromQL
+- Short for Prometheus Query Language
+- Main way to query metrics within Prometheus
+- Data returned can be visualized in dashboards
+- Used to build alerting rules to notify administrator
 ## Data Types
 1. Instant Vector
-- A set of time series contaning a single sample for each time series, alllsharing the same timestamp
+- A set of time series contaning a single sample for each time series, all sharing the same timestamp
 2. Range Vector
 - A set of time series contaning a range of data points over time for each time series.
 - Adding [1m] i.e time duration, in end of metrics
@@ -31,7 +35,35 @@ process_cpu_seconds_total{job='node_exporter', instance='localhost:8080'}
     - Negative Regular expression matcher (!~):
         - Select labels taht do not regex-match with the provided string
         - Ex: `prometheus_http_requests_total{handler!~"/api.*"}`
+- Multiple selector
+    - `node_filesystem_avail_bytes{instance=“node1”, device!=“tmpfs”}`
+- Range Vector Selectors
+    - Returns all the values for a metric over a period of time
+    - Ex `node_arp_entries{instance=“node1”}[2m]`
 
+## Modifiers
+- When performing a query, it returns the current value of a metric, To get historic data use an offset modifier after the label matching
+- Ex 
+    - `node_memory_Active_bytes{instance=“node1”} offset 5m`
+    - `node_memory_Active_bytes{instance=“node1”} offset 2w`
+    - `node_memory_Active_bytes{instance=“node1”} offset 1h30m`
+
+- ms = millisecond
+- s = seconds
+- m = Minutes
+- h = Hours
+- d = Days
+- w = Weeks
+- y = years, which have 365 days
+
+- To go back to a specific point in time use the @ modifier, use unix  timestamp
+- Ex `node_memory_Active_bytes{instance="node1"} @1663265188` 
+
+- The offset modifier can be combined with the @ modifier
+- Ex `node_memory_Active_bytes{instance="node1"} @1663265188 offset 5m`
+
+- The offset and @ modifier also work with range vectors
+- Ex ` node_memory_Active_bytes{instance="node1"}[2m] @1663265188 offset 10m`
 ## Operator
 1. Binary Operator
 - Binary operator are the operator that take two operands and performs the specified calculation on them.
