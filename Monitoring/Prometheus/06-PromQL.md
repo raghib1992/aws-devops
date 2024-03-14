@@ -139,10 +139,16 @@ follow an order of precedence, from highest to lowest:
     topk (largest k elements by sample value)
     quantile (calculate φ-quantile (0 ≤ φ ≤ 1) over dimensions)
     ```
-    - Example: `sum(prometheus_http_requests_total) by (code)`
-    - Example: `topk(3, sum(node_cpu_seconds_total) by (mode))`
-    - Example: `bottomk(3, sum(node_cpu_seconds_total) by (mode))`
-    - Ex: `max(node_cpu_seconds_total)`
+- Example: 
+    - `sum(prometheus_http_requests_total) by (code)`
+    - `topk(3, sum(node_cpu_seconds_total) by (mode))`
+    - `bottomk(3, sum(node_cpu_seconds_total) by (mode))`
+    - `max(node_cpu_seconds_total)`
+    - `sum by(instance) (http_requests)`
+    - `sum by(instance, method) (http_requests)`
+- The without keyword does the opposite of by and tells the query which labels not to  include in the aggregation
+    - `sum without(path) (http_requests)`
+
 
 ## vector Matching
 - Operators between and instant vectors and scalars
@@ -170,7 +176,7 @@ node_filesystem_avail_bytes < 1000
     http_errors{code="500"} / on(method) http_requests
     ```
 
-
+## Function
 
 
 ## rate 
@@ -209,3 +215,8 @@ node_filesystem_avail_bytes < 1000
 
 ### Link for details function 
 - *https://prometheus.io/docs/prometheus/latest/querying/functions/*
+
+echo "node_filesystem_files{job=\"web\"} > 1000" > /root/query1.txt
+echo "node_filesystem_avail_bytes{job=\"web\"} > 1000" > /root/query1.txt
+
+echo "node_filesystem_files > 500000 and node_filesystem_files < 10000000" > /root/query3.txt
