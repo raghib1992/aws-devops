@@ -132,4 +132,18 @@ systemctl status prometheus-node-exporter
 ### authentication
 
 
-## Install docker container
+## Installing Prometheus using Helm
+```sh
+kubectl create namespace darwin
+
+helm install prometheus prometheus-community/kube-prometheus-stack --namespace darwin
+# To verify the installation, run the command:
+
+kubectl get pods -n darwin
+```
+#### Port-Forwarding to access the Prometheus UI 
+```sh
+kubectl port-forward -n darwin prometheus-prometheus-0 9091:9090
+# keep the port-forward running in the background
+ 
+``` 
