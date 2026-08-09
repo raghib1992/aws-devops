@@ -1,0 +1,28 @@
+{
+  "family": "fancy-app-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::066148155648:role/ecsPrivateExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "fancy-app",
+      "image": "public.ecr.aws/docker/library/httpd:2.4",
+      "essential": true,
+      "portMappings": [
+        { "containerPort": 80, "protocol": "tcp" }
+      ],
+      "secrets": [
+        {
+          "name": "APP_THEME",
+          "valueFrom": "arn:aws:ssm:eu-north-1:066148155648:parameter/app/config/theme"
+        },
+        {
+          "name": "DB_CREDENTIALS",
+          "valueFrom": "arn:aws:secretsmanager:eu-north-1:066148155648:secret:prod/rds/credentials"
+        }
+      ]
+    }
+  ]
+}
